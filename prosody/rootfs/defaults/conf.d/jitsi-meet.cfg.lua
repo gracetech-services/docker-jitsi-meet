@@ -101,6 +101,7 @@ consider_websocket_secure = true;
 VirtualHost "jigasi.meet.jitsi"
     modules_enabled = {
       "ping";
+      "muc_allowners";
       "bosh";
       "muc_password_check";
     }
@@ -254,6 +255,7 @@ Component "{{ $XMPP_MUC_DOMAIN }}" "muc"
     storage = "memory"
     modules_enabled = {
         "muc_meeting_id";
+        "muc_allowners";
         {{ if .Env.XMPP_MUC_MODULES -}}
         "{{ join "\";\n\"" (splitList "," .Env.XMPP_MUC_MODULES) }}";
         {{ end -}}

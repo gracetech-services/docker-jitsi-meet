@@ -65,6 +65,7 @@ COPY rootfs/ /
 
 COPY --from=builder /usr/local/lib/lua/5.4 /usr/local/lib/lua/5.4
 COPY --from=builder /usr/local/share/lua/5.4 /usr/local/share/lua/5.4
+COPY ./mod_token_moderation.lua /prosody-plugins-custom/
 
 EXPOSE 5222 5280
 

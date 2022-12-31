@@ -18,8 +18,8 @@ RUN apt-dpkg-wrap apt-get update && \
     apt-cleanup
 
 # Download latest private build
-RUN curl https://files.idigest.app/libs/app.bundle.min.js -o /usr/share/jitsi-meet/app.bundle.min.js && \
-    printf "\n /* Build: $(date '+%Y.%m.%d-%H.%M.%S') */" >> /usr/share/jitsi-meet/app.bundle.min.js
+RUN curl https://files.idigest.app/libs/app.bundle.min.js -o /usr/share/jitsi-meet/libs/app.bundle.min.js && \
+    printf "\n /* Build: $(date '+%Y.%m.%d-%H.%M.%S') */" >> /usr/share/jitsi-meet/libs/app.bundle.min.js
 
 EXPOSE 80 443
 

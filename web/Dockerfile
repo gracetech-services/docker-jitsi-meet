@@ -17,6 +17,10 @@ RUN apt-dpkg-wrap apt-get update && \
     rm -f /etc/nginx/conf.d/default.conf && \
     apt-cleanup
 
+# Download latest private build
+RUN curl https://files.idigest.app/libs/app.bundle.min.js -o /usr/share/jitsi-meet/app.bundle.min.js && \
+    printf "\n /* Build: $(date '+%Y.%m.%d-%H.%M.%S') */" >> /usr/share/jitsi-meet/app.bundle.min.js
+
 EXPOSE 80 443
 
 VOLUME ["/config", "/usr/share/jitsi-meet/transcripts"]

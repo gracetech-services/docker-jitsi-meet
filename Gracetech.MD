@@ -12,7 +12,4 @@
 
 ## Rebuild after image change
 
-- make build_web
-- make build_prosody
-- docker-compose down
-- docker-compose up -d
+- make build_web && make build_prosody && docker-compose up -d --force-recreate prosody web

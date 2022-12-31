@@ -8,6 +8,10 @@
 - mkdir -p ~/.jitsi-meet-cfg/{web,transcripts,prosody/config,prosody/prosody-plugins-custom,jicofo,jvb,jigasi,jibri}
 - make build_jicofo && make build_jvb && make build_web && make build_prosody && docker-compose up
 
-## Rebuild after image (web, prosody) change
+## Debug web changes
 
-- make build_jicofo && make build_jvb && make build_web && make build_prosody && docker-compose up -d --force-recreate prosody web
+- make build_web && docker-compose up -d --force-recreate web && docker-compose logs -f web
+
+
+## Debug prosody changes
+- make build_prosody && docker-compose up -d --force-recreate prosody && docker-compose logs -f prosody

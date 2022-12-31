@@ -53,6 +53,7 @@ function setupAffiliation(room, origin, stanza)
                         local dotSecond = origin.auth_token:sub(dotFirst + 1):find("%.");
                         if dotSecond then
                                 local bodyB64 = origin.auth_token:sub(dotFirst + 1, dotFirst + dotSecond - 1);
+                                log('info', basexx.from_url64(bodyB64));
                                 local body = json.decode(basexx.from_url64(bodyB64));
                                 local jid = jid_bare(stanza.attr.from);
                                 -- If user is a moderator or an admin, set their affiliation to be an owner
@@ -63,5 +64,7 @@ function setupAffiliation(room, origin, stanza)
                                 end;
 			end;
 		end;
+        else
+                log('info', "origin.auth_token not exist!");
 	end;
 end;

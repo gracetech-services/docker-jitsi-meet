@@ -103,6 +103,9 @@ VirtualHost "jigasi.meet.jitsi"
       "ping";
       "bosh";
       "muc_password_check";
+      {{ if .Env.JAAS_MODULES -}}
+      "{{ join "\";\n\"" (splitList "," .Env.JAAS_MODULES) }}";
+      {{ end -}}
     }
     authentication = "token"
     app_id = "jitsi";

@@ -6,7 +6,7 @@
 - (edit .env, update `PUBLIC_URL`)
 - ./gen-passwords.sh
 - mkdir -p ~/.jitsi-meet-cfg/{web,transcripts,prosody/config,prosody/prosody-plugins-custom,jicofo,jvb,jigasi,jibri}
-- make build_jicofo && make build_jvb && make build_web && make build_prosody && docker-compose up -d
+- docker-compose down && docker image prune -a -f && docker system prune -a -f && make build_jicofo && make build_jvb && make build_web && make build_prosody && docker-compose up -d
 
 ## Debug web changes
 

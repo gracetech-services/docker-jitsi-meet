@@ -7,6 +7,7 @@ local jid_bare = require "util.jid".bare;
 local json = require "cjson";
 local basexx = require "basexx";
 local um_is_admin = require "core.usermanager".is_admin;
+local it = require "util.iterators";
 
 local function is_admin(jid)
         return um_is_admin(jid, module.host);
@@ -54,6 +55,7 @@ function setupAffiliation(room, origin, stanza)
                         if dotSecond then
                                 local bodyB64 = origin.auth_token:sub(dotFirst + 1, dotFirst + dotSecond - 1);
                                 log('info', basexx.from_url64(bodyB64));
+                                log('info', tostring(it.count(it.keys(prosody.full_sessions))));
                                 local body = json.decode(basexx.from_url64(bodyB64));
                                 local jid = jid_bare(stanza.attr.from);
                                 -- If user is a moderator or an admin, set their affiliation to be an owner

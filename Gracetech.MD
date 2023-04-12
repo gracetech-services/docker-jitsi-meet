@@ -1,6 +1,6 @@
 # GraceTech Development
 
-## Installation
+## First Time Installation
 
 - cp env.example .env
 - (edit .env, update `PUBLIC_URL`)
@@ -8,10 +8,10 @@
 - mkdir -p ~/.jitsi-meet-cfg/{web,transcripts,prosody/config,prosody/prosody-plugins-custom,jicofo,jvb,jigasi,jibri}
 - docker-compose down && docker image prune -a -f && docker system prune -a -f && make all && docker-compose up -d
 
-## Debug web changes
+## Rebuild web changes
 
-- make build_web && docker-compose up -d --force-recreate web && docker-compose logs -f web
+- FORCE_REBUILD=1 make build_web && docker-compose up -d --force-recreate web && docker-compose logs -f web
 
+## Rebuild prosody changes
 
-## Debug prosody changes
-- make build_prosody && docker-compose up -d --force-recreate prosody && docker-compose logs -f prosody
+- FORCE_REBUILD=1 make build_prosody && docker-compose up -d --force-recreate prosody && docker-compose logs -f prosody

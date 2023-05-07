@@ -1,5 +1,6 @@
 ARG JITSI_REPO=jitsi
-ARG BASE_TAG=latest
+# FIXME: update this when our webapp is updated
+ARG BASE_TAG=unstable-2022-12-23
 FROM ${JITSI_REPO}/base:${BASE_TAG}
 
 LABEL org.opencontainers.image.title="Jitsi Meet"

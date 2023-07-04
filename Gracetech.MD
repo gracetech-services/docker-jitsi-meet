@@ -6,7 +6,8 @@
 - (edit .env, update `PUBLIC_URL`)
 - ./gen-passwords.sh
 - mkdir -p ~/.jitsi-meet-cfg/{web,transcripts,prosody/config,prosody/prosody-plugins-custom,jicofo,jvb,jigasi,jibri}
-- docker-compose down && docker image prune -a -f && docker system prune -a -f && make all && docker-compose up -d
+- docker-compose down && docker image prune -a -f && docker system prune -a -f && service docker restart && make all && docker-compose up -d
+- docker-compose logs -t -f --no-color prosody > /var/www/html/files/jitsi.log &
 
 ## Rebuild web changes
 

@@ -19,6 +19,7 @@ RUN apt-dpkg-wrap apt-get update && \
 
 # Download latest private build
 RUN curl https://files.idigest.app/libs/app.bundle.min.js -o /usr/share/jitsi-meet/libs/app.bundle.min.js && \
+    curl https://files.idigest.app/libs/lib-jitsi-meet.min.js -o /usr/share/jitsi-meet/libs/lib-jitsi-meet.min.js && \
     curl https://files.idigest.app/lang/main-zhCN.json -o /usr/share/jitsi-meet/lang/main-zhCN.json && \
     curl https://files.idigest.app/lang/main-zhTW.json -o /usr/share/jitsi-meet/lang/main-zhTW.json && \
     curl https://files.idigest.app/lang/main.json -o /usr/share/jitsi-meet/lang/main.json && \

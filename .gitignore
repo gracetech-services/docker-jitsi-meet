@@ -4,3 +4,4 @@ docker-compose.override.yml
 log-analyser/grafana
 **/.DS_Store
 **/.idea
+**/local_build/*

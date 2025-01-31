@@ -18,11 +18,11 @@ RUN apt-dpkg-wrap apt-get update && \
     apt-cleanup
 
 # Download latest private build
-COPY local_build/app.bundle.min.js /usr/share/jitsi-meet/libs/app.bundle.min.js
-COPY local_build/lib-jitsi-meet.min.js /usr/share/jitsi-meet/libs/lib-jitsi-meet.min.js
-COPY local_build/main.json /usr/share/jitsi-meet/lang/main.json
-COPY local_build/main-zhCN.json /usr/share/jitsi-meet/lang/main-zhCN.json
-COPY local_build/main-zhTW.json /usr/share/jitsi-meet/lang/main-zhTW.json
+COPY local_build/libs/app.bundle.min.js /usr/share/jitsi-meet/libs/app.bundle.min.js
+COPY local_build/libs/lib-jitsi-meet.min.js /usr/share/jitsi-meet/libs/lib-jitsi-meet.min.js
+COPY local_build/lang/main.json /usr/share/jitsi-meet/lang/main.json
+COPY local_build/lang/main-zhCN.json /usr/share/jitsi-meet/lang/main-zhCN.json
+COPY local_build/lang/main-zhTW.json /usr/share/jitsi-meet/lang/main-zhTW.json
 COPY local_build/all.css /usr/share/jitsi-meet/css/all.css
 
 EXPOSE 80 443

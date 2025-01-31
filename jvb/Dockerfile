@@ -13,5 +13,6 @@ RUN apt-dpkg-wrap apt-get update && \
     apt-cleanup
 
 COPY rootfs/ /
+COPY local_build/jitsi-videobridge.jar /usr/share/jitsi-videobridge
 
 VOLUME /config

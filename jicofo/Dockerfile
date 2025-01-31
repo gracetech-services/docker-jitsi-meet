@@ -13,5 +13,6 @@ RUN apt-dpkg-wrap apt-get update && \
     apt-cleanup
 
 COPY rootfs/ /
+COPY local_build/jicofo.jar /usr/share/jicofo
 
 VOLUME /config

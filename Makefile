@@ -35,7 +35,7 @@ $(addprefix buildx_,$(JITSI_SERVICES)):
 build:
 	docker build \
 		$(BUILD_ARGS) \
- 		--no-cache \
+		--no-cache \
 		--progress plain \
 		--tag $(JITSI_REPO)/$(JITSI_SERVICE) \
 		$(JITSI_SERVICE)

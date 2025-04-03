@@ -90,7 +90,7 @@ modules_enabled = {
 	-- Not essential, but recommended
 		"private"; -- Private XML storage (for room bookmarks, etc.)
 		"limits"; -- Enable bandwidth limiting for XMPP connections
-
+        "smacks"; -- Stream management and resumption (XEP-0198)
 	-- These are commented by default as they have a performance impact
 		--"privacy"; -- Support privacy lists
 		--"compression"; -- Stream compression (Debian: requires lua-zlib module to work)

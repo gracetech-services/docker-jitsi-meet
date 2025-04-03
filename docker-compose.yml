@@ -188,7 +188,10 @@ services:
             meet.jitsi:
         depends_on:
             - jvb
-
+        logging:
+            driver: "json-file"
+            options:
+                labels: "service"
     # XMPP server
     prosody:
         image: jitsi/prosody:${JITSI_IMAGE_VERSION:-unstable}
@@ -337,7 +340,10 @@ services:
             meet.jitsi:
                 aliases:
                     - ${XMPP_SERVER:-xmpp.meet.jitsi}
-
+        logging:
+            driver: "json-file"
+            options:
+                labels: "service"
     # Focus component
     jicofo:
         image: jitsi/jicofo:${JITSI_IMAGE_VERSION:-unstable}
@@ -425,7 +431,10 @@ services:
             - prosody
         networks:
             meet.jitsi:
-
+        logging:
+            driver: "json-file"
+            options:
+                labels: "service"
     # Video bridge
     jvb:
         image: jitsi/jvb:${JITSI_IMAGE_VERSION:-unstable}
@@ -499,7 +508,10 @@ services:
             - prosody
         networks:
             meet.jitsi:
-
+        logging:
+            driver: "json-file"
+            options:
+                labels: "service"
 # Custom network so all services can communicate using a FQDN
 networks:
     meet.jitsi:

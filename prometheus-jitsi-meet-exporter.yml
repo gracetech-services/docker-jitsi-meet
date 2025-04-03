@@ -1,0 +1,9 @@
+services:
+  prometheus-jitsi-exporter:
+    image: systemli/prometheus-jitsi-meet-exporter:latest
+    container_name: prometheus-jitsi-meet
+    ports:
+      - 9888:9888
+    command: ["-videobridge-url", "http://172.18.0.4:8080/colibri/stats"]
+    networks:
+      meet.jitsi:

@@ -13,3 +13,6 @@ services:
       - "3000:3000"
     networks:
       meet.jitsi:
+
+networks:
+  meet.jitsi:

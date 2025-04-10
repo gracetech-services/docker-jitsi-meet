@@ -2,7 +2,7 @@ ARG JITSI_REPO=jitsi
 ARG BASE_TAG=latest
 
 FROM ${JITSI_REPO}/base:${BASE_TAG} as builder
-
+COPY ./luarocks-3.11.1.tar.gz /tmp
 RUN apt-dpkg-wrap apt-get update && \
     apt-dpkg-wrap apt-get install -y \
       build-essential \
@@ -12,8 +12,7 @@ RUN apt-dpkg-wrap apt-get update && \
       git \
       unzip \
       wget && \
-    mkdir /tmp/luarocks && \
-    wget -qO - https://luarocks.github.io/luarocks/releases/luarocks-3.8.0.tar.gz | tar xfz - --strip-components 1 -C /tmp/luarocks && \
+    mkdir /tmp/luarocks && tar xfz /tmp/luarocks-3.11.1.tar.gz  --strip-components 1 -C /tmp/luarocks && \
     cd /tmp/luarocks && ./configure && make && make install && cd - && \
     luarocks install basexx 0.4.1-1 && \
     luarocks install lua-cjson 2.1.0-1 && \

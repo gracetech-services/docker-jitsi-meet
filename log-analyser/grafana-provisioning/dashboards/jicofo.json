@@ -24,7 +24,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "a4bdfb3e-762a-46e5-a79f-2e7bbe88d444"
+        "uid": "e8ba00e0-316c-4636-8014-ab49f3a7a459"
       },
       "gridPos": {
         "h": 8,
@@ -47,10 +47,11 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "a4bdfb3e-762a-46e5-a79f-2e7bbe88d444"
+            "uid": "e8ba00e0-316c-4636-8014-ab49f3a7a459"
           },
           "editorMode": "code",
           "expr": "{exporter=\"OTLP\"} | json | attributes_attrs_service=\"jitsi-jicofo\"",
+          "hide": false,
           "queryType": "range",
           "refId": "A"
         }
@@ -61,7 +62,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "a4bdfb3e-762a-46e5-a79f-2e7bbe88d444"
+        "uid": "e8ba00e0-316c-4636-8014-ab49f3a7a459"
       },
       "fieldConfig": {
         "defaults": {
@@ -117,7 +118,7 @@
             "uid": "b8130a28-4867-4668-917d-539c93852857"
           },
           "editorMode": "code",
-          "expr": "sum by (attributes_level) (\n  rate({exporter=\"OTLP\"} | json|attributes_attrs_service=\"jitsi-jicofo\"| line_format \"{{.log}}\" | logfmt | pattern \"[<_>] <_level>: <_>\"[5m])\n)",
+          "expr": "sum by (attributes_level) (\n  rate({exporter=\"OTLP\"} | json|attributes_attrs_service=\"jitsi-jicofo\"| line_format \"{{.log}}\" | logfmt | pattern \"[<_>] <_level>: <_>\"[24h])\n)",
           "legendFormat": "Level: {{attributes_level}}",
           "queryType": "range",
           "refId": "A"
@@ -129,7 +130,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "a4bdfb3e-762a-46e5-a79f-2e7bbe88d444"
+        "uid": "e8ba00e0-316c-4636-8014-ab49f3a7a459"
       },
       "fieldConfig": {
         "defaults": {
@@ -183,8 +184,8 @@
             "type": "loki",
             "uid": "b8130a28-4867-4668-917d-539c93852857"
           },
-          "editorMode": "code",
-          "expr": "sum by (attributes_level, attributes_attrs_service) (\n  rate({exporter=\"OTLP\"} | json|attributes_attrs_service=\"jitsi-jicofo\"| line_format \"{{.attributes_message}}\" | logfmt | pattern \"[<_>] <attributes_level>#<attributes_attrs_service>: <_>\"[5m]))",
+          "editorMode": "builder",
+          "expr": "sum by(attributes_level, attributes_attrs_service) (rate({exporter=\"OTLP\"} | json | attributes_attrs_service = `jitsi-jicofo` | line_format `{{.attributes_message}}` | logfmt | pattern `[<_>] <attributes_level>#<attributes_attrs_service>: <_>` [24h]))",
           "legendFormat": "Level: {{attributes_level}}",
           "queryType": "range",
           "refId": "A"
@@ -197,7 +198,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "a4bdfb3e-762a-46e5-a79f-2e7bbe88d444"
+        "uid": "e8ba00e0-316c-4636-8014-ab49f3a7a459"
       },
       "fieldConfig": {
         "defaults": {
@@ -280,7 +281,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "sum by (attributes_codefile) (\n    rate({exporter=\"OTLP\"} | json|attributes_attrs_service=\"jitsi-jicofo\"| attributes_level=\"ERROR\" | line_format \"{{.attributes_message}}\" | logfmt | pattern \"[<_>] <attributes_level>#<attributes_attrs_service>: <_>\"[5m]))",
+          "expr": "sum by (attributes_codefile) (\n    rate({exporter=\"OTLP\"} | json|attributes_attrs_service=\"jitsi-jicofo\"| attributes_level=\"ERROR\" | line_format \"{{.attributes_message}}\" | logfmt | pattern \"[<_>] <attributes_level>#<attributes_attrs_service>: <_>\"[24h]))",
           "queryType": "range",
           "refId": "A"
         }
@@ -291,7 +292,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "a4bdfb3e-762a-46e5-a79f-2e7bbe88d444"
+        "uid": "e8ba00e0-316c-4636-8014-ab49f3a7a459"
       },
       "description": "This panel shows the number of conference requests over time.",
       "fieldConfig": {
@@ -372,10 +373,10 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "a4bdfb3e-762a-46e5-a79f-2e7bbe88d444"
+            "uid": "e8ba00e0-316c-4636-8014-ab49f3a7a459"
           },
           "editorMode": "code",
-          "expr": "count_over_time({exporter=\"OTLP\"} | json | attributes_attrs_service=\"jitsi-jicofo\" |= \"Conference request\" [1m])",
+          "expr": "count_over_time({exporter=\"OTLP\"} | json | attributes_attrs_service=\"jitsi-jicofo\" |= \"Conference request\" [24h])",
           "queryType": "range",
           "refId": "A"
         }
@@ -386,7 +387,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "a4bdfb3e-762a-46e5-a79f-2e7bbe88d444"
+        "uid": "e8ba00e0-316c-4636-8014-ab49f3a7a459"
       },
       "fieldConfig": {
         "defaults": {
@@ -429,10 +430,10 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "a4bdfb3e-762a-46e5-a79f-2e7bbe88d444"
+            "uid": "e8ba00e0-316c-4636-8014-ab49f3a7a459"
           },
           "editorMode": "code",
-          "expr": "sum(count_over_time({exporter=\"OTLP\"} | json | attributes_attrs_service=\"jitsi-jicofo\" |~ \"Member left|Terminating|Removed participant\" [1m]))",
+          "expr": "sum(count_over_time({exporter=\"OTLP\"} | json | attributes_attrs_service=\"jitsi-jicofo\" |~ \"Member left|Terminating|Removed participant\" [24h]))",
           "queryType": "range",
           "refId": "A"
         }
@@ -455,6 +456,6 @@
   "timezone": "",
   "title": "Jicofo Dashboard",
   "uid": "f2dcfe84-3c27-4b1d-8583-bc2c97a8d22d",
-  "version": 20,
+  "version": 1,
   "weekStart": ""
 }

@@ -326,6 +326,7 @@ authentication = "internal_hashed"
 --  Logs errors to syslog also
 log = {
 	{ levels = {min = "{{ $LOG_LEVEL }}"}, timestamps = "%Y-%m-%d %X", to = "console"};
+	 { levels = {min = "{{ $LOG_LEVEL }}"}, timestamps = "%Y-%m-%d %X", to = "file", filename = "/var/log/prosody/prosody.log"};
 {{ if .Env.PROSODY_LOG_CONFIG }}
 	{{ join "\n" (splitList "\\n" .Env.PROSODY_LOG_CONFIG | compact) }}
 {{ end }}

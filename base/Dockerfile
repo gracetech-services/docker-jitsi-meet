@@ -4,7 +4,8 @@ ARG JITSI_RELEASE=stable
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 
 COPY rootfs /
-
+# if you need change debian.sources
+# RUN  sed -i "s|http://deb.debian.org/|http://mirrors.tuna.tsinghua.edu.cn/|g" /etc/apt/sources.list.d/debian.sources
 RUN \
     dpkgArch="$(dpkg --print-architecture)" && \
     case "${dpkgArch##*-}" in \

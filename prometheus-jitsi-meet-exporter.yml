@@ -4,6 +4,9 @@ services:
     container_name: prometheus-jitsi-meet
     ports:
       - 9888:9888
-    command: ["-videobridge-url", "http://172.18.0.4:8080/colibri/stats"]
+    command: ["-videobridge-url", "http://172.19.0.4:8080/colibri/stats"]
     networks:
       meet.jitsi:
+# Custom network so all services can communicate using a FQDN
+networks:
+  meet.jitsi:

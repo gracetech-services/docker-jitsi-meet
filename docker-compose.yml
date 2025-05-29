@@ -336,6 +336,8 @@ services:
             - XMPP_RECORDER_DOMAIN
             - XMPP_SERVER_S2S_PORT
             - XMPP_SPEAKERSTATS_MODULES
+#            - PROSODY_ENABLE_PROMETHEUS=true
+#            - PROSODY_PROMETHEUS_PORT=5280
         networks:
             meet.jitsi:
                 aliases:
@@ -427,6 +429,8 @@ services:
             - XMPP_RECORDER_DOMAIN
             - MAX_SSRCS_PER_USER
             - MAX_SSRC_GROUPS_PER_USER
+#            - JICOFO_ENABLE_PROMETHEUS=true
+#            - JICOFO_PROMETHEUS_PORT=8888
         depends_on:
             - prosody
         networks:
@@ -504,6 +508,9 @@ services:
             - XMPP_INTERNAL_MUC_DOMAIN
             - XMPP_SERVER
             - XMPP_PORT
+#            - JVB_PROMETHEUS_ENABLED=true
+#            - JVB_PROMETHEUS_PORT=8080
+#            - JVB_PROMETHEUS_HOST=0.0.0.0
         depends_on:
             - prosody
         networks:

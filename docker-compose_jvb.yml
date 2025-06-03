@@ -1,0 +1,81 @@
+services:
+    # Video bridge
+    jvb:
+        image: jitsi/jvb:${JITSI_IMAGE_VERSION:-unstable}
+        restart: ${RESTART_POLICY:-unless-stopped}
+        # We can set the resources limits here
+        # deploy:
+        #     resources:
+        #         limits:
+        #             cpus: '8'
+        #             memory: 32G
+        ports:
+            - '${JVB_PORT:-10000}:${JVB_PORT:-10000}/udp'
+            - '127.0.0.1:${JVB_COLIBRI_PORT:-8080}:8080'
+        volumes:
+            - ${CONFIG}/jvb:/config:Z
+        labels:
+            service: "jitsi-jvb"
+        environment:
+            - AUTOSCALER_SIDECAR_KEY_FILE
+            - AUTOSCALER_SIDECAR_KEY_ID
+            - AUTOSCALER_SIDECAR_GROUP_NAME
+            - AUTOSCALER_SIDECAR_HOST_ID
+            - AUTOSCALER_SIDECAR_INSTANCE_ID
+            - AUTOSCALER_SIDECAR_PORT
+            - AUTOSCALER_SIDECAR_REGION
+            - AUTOSCALER_SIDECAR_SHUTDOWN_POLLING_INTERVAL
+            - AUTOSCALER_SIDECAR_STATS_POLLING_INTERVAL
+            - DOCKER_HOST_ADDRESS=${DOCKER_HOST_ADDRESS}
+            - ENABLE_COLIBRI_WEBSOCKET
+            - ENABLE_JVB_XMPP_SERVER
+            - ENABLE_OCTO
+            - ENABLE_SCTP
+            - JVB_ADVERTISE_IPS
+            - JVB_ADVERTISE_PRIVATE_CANDIDATES
+            - JVB_AUTH_USER=jvb
+            - JVB_AUTH_PASSWORD
+            - JVB_BREWERY_MUC
+            - JVB_CC_TRUST_BWE
+            - JVB_DISABLE_STUN
+            - JVB_DISABLE_XMPP
+            - JVB_INSTANCE_ID
+            - JVB_PORT
+            - JVB_MUC_NICKNAME
+            - JVB_TCP_HARVESTER_DISABLED=true
+            - JVB_STUN_SERVERS
+            - JVB_LOG_FILE
+            - JVB_OCTO_BIND_ADDRESS
+            - JVB_OCTO_REGION
+            - JVB_OCTO_RELAY_ID
+            - JVB_REQUIRE_VALID_ADDRESS
+            - JVB_USE_USRSCTP
+            - JVB_WS_DOMAIN
+            - JVB_WS_SERVER_ID
+            - JVB_WS_TLS
+            - JVB_XMPP_AUTH_DOMAIN
+            - JVB_XMPP_INTERNAL_MUC_DOMAIN
+            - JVB_XMPP_PORT
+            - JVB_XMPP_SERVER
+            - PUBLIC_URL=${PUBLIC_URL}
+            - SENTRY_DSN="${JVB_SENTRY_DSN:-0}"
+            - SENTRY_ENVIRONMENT
+            - SENTRY_RELEASE
+            - COLIBRI_REST_ENABLED
+            - SHUTDOWN_REST_ENABLED
+            - TZ
+            - VIDEOBRIDGE_MAX_MEMORY
+            - XMPP_AUTH_DOMAIN
+            - XMPP_INTERNAL_MUC_DOMAIN
+            - XMPP_SERVER=${XMPP_SERVER}
+            - XMPP_DOMAIN
+            - XMPP_PORT
+        networks:
+            meet.jitsi:
+        logging:
+            driver: "json-file"
+            options:
+                labels: "service"
+# Custom network so all services can communicate using a FQDN
+networks:
+    meet.jitsi:

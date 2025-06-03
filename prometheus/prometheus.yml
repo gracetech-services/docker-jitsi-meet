@@ -5,7 +5,12 @@ scrape_configs:
       - targets: ["prosody:5280","jvb:8080","jicofo:8888","otel:9464"]
 
 #  enable prometheus-jitsi-exporter
-#  - job_name: "prometheus-jitsi"
-#    scrape_interval: 15s
-#    static_configs:
-#      - targets: ["prometheus-jitsi-exporter:9888"]
+  - job_name: "prometheus-jitsi"
+    scrape_interval: 15s
+    static_configs:
+      - targets: ["prometheus-jitsi-exporter:9888","167.88.44.17:9888"]
+
+  - job_name: "node-exporter"
+    scrape_interval: 15s
+    static_configs:
+      - targets: ["167.88.44.17:9100","168.231.118.169:9100"]  

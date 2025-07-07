@@ -70,6 +70,7 @@ services:
             - XMPP_SERVER=${XMPP_SERVER}
             - XMPP_DOMAIN
             - XMPP_PORT
+            - SUSPEND_VIDEO_STREAMS=true
         networks:
             meet.jitsi:
         logging:

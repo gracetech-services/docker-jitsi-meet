@@ -628,7 +628,7 @@ config.whiteboard.userLimit = 25;
 
 
 {{ if .Env.CHANNEL_LAST_N -}}
-config.channelLastN =  {{ .Env.CHANNEL_LAST_N }};
+config.channelLastN = {{ .Env.CHANNEL_LAST_N }};
 {{ end -}}
 
 // Testing

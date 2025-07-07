@@ -627,8 +627,8 @@ config.whiteboard.userLimit = 25;
 {{ end -}}
 
 
-{{ if .Env.ENDPOINT_MAX_RECEIVING_VIDEO_STREAMS -}}
-config.channelLastN =  {{ .Env.ENDPOINT_MAX_RECEIVING_VIDEO_STREAMS }};
+{{ if .Env.CHANNEL_LAST_N -}}
+config.channelLastN =  {{ .Env.CHANNEL_LAST_N }};
 {{ end -}}
 
 // Testing

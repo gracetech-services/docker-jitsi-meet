@@ -11,3 +11,6 @@ services:
       - ./prometheus:/etc/prometheus
     networks:
       meet.jitsi:
+# Custom network so all services can communicate using a FQDN
+networks:
+  meet.jitsi:

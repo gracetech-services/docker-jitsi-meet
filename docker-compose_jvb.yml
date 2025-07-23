@@ -71,6 +71,8 @@ services:
             - XMPP_DOMAIN
             - XMPP_PORT
             - SUSPEND_VIDEO_STREAMS=true
+            - JVB_LAST_N
+            - INITIAL_LAST_N
         networks:
             meet.jitsi:
         logging:

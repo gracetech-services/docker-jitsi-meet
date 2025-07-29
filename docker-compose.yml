@@ -506,6 +506,8 @@ services:
             - SUSPEND_VIDEO_STREAMS=true
             - JVB_LAST_N
             - INITIAL_LAST_N
+            - ROUTE_LOUDEST_ONLY
+            - NUM_LOUDEST
         depends_on:
             - prosody
         networks:

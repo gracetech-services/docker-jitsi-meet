@@ -336,6 +336,7 @@ services:
         networks:
             meet.jitsi:
                 aliases:
+                    - xmpp.meet.jitsi
                     - ${XMPP_SERVER:-xmpp.meet.jitsi}
 
     # Focus component

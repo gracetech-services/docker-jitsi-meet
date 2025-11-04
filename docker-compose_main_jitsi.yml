@@ -4,8 +4,8 @@ services:
         image: jitsi/web:${JITSI_IMAGE_VERSION:-unstable}
         restart: ${RESTART_POLICY:-unless-stopped}
         ports:
-            - '${HTTP_PORT}:80'
-            - '${HTTPS_PORT}:443'
+            - "${HTTP_PORT}:80"
+            - "${HTTPS_PORT}:443"
         volumes:
             - ${CONFIG}/web:/config:Z
             - ${CONFIG}/web/crontabs:/var/spool/cron/crontabs:Z
@@ -192,10 +192,7 @@ services:
         image: jitsi/prosody:${JITSI_IMAGE_VERSION:-unstable}
         restart: ${RESTART_POLICY:-unless-stopped}
         ports:
-            - '${XMPP_PORT:-5222}:5222/tcp'
-            - '${PROSODY_S2S_PORT:-5269}:5269/udp'
-            - '5347:5347'
-            - '${PROSODY_HTTP_PORT:-5280}:5280/tcp'
+            - "5222:5222"
         labels:
             service: "jitsi-prosody"
         volumes:
@@ -238,7 +235,6 @@ services:
             - JIGASI_XMPP_PASSWORD
             - JVB_AUTH_USER
             - JVB_AUTH_PASSWORD
-            - JVB_ADDRESS=f1.alphaomega.top
             - JWT_APP_ID
             - JWT_APP_SECRET
             - JWT_ACCEPTED_ISSUERS
@@ -343,7 +339,7 @@ services:
         image: jitsi/jicofo:${JITSI_IMAGE_VERSION:-unstable}
         restart: ${RESTART_POLICY:-unless-stopped}
         ports:
-            - '127.0.0.1:${JICOFO_REST_PORT:-8888}:8888'
+            - "127.0.0.1:${JICOFO_REST_PORT:-8888}:8888"
         volumes:
             - ${CONFIG}/jicofo:/config:Z
         labels:

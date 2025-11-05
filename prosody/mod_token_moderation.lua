@@ -7,12 +7,10 @@ local jid_bare = require"util.jid".bare;
 local json = require "cjson";
 local basexx = require "basexx";
 local util = module:require 'util';
-local is_admin = util.is_admin;
-local it = require "util.iterators";
+local is_admin = util.is_admin;local it = require "util.iterators";
 local jid_resource = require"util.jid".resource;
 local jid_node = require'util.jid'.node;
 local jid_split = require"util.jid".split;
-local http = require "net.http";
 
 log('info', 'Loaded token moderation plugin');
 
@@ -23,14 +21,12 @@ local function dumpSessions(hide_user_name)
         local username = session.username;
         if (username ~= 'focus' and username ~= 'jvb' and username ~= hide_user_name) then
             index = index + 1;
-            local user_info = username_to_displayname_map[username] or {};
-            log('info', "#%d: [%s(%s)] IP: [%s] Email: [%s] in room [%s]", 
-                index, user_info.name or "unknown", username, user_info.ip or "unknown", user_info.email or "unknown",
+            log('info', "#%d: [%s(%s)] in room [%s]", index, username_to_displayname_map[username], username,
                 session.jitsi_web_query_room);
         end
     end
     log('info', "Total online users: %d", index);
-end;
+end
 
 module:hook("muc-occupant-joined", function(event)
     local occupant, room = event.occupant, event.room;
@@ -42,13 +38,7 @@ module:hook("muc-occupant-joined", function(event)
     local room_node, _, _ = jid_split(room.jid);
     local occupant_node, _, _ = jid_split(occupant.jid);
     log('info', "[%s(%s)] joined [%s]", display_name, occupant_node, room_node);
-    
-    -- Initialize user info with display name
-    username_to_displayname_map[occupant_node] = {
-        name = display_name,
-        email = nil,
-        ip = nil
-    };
+    username_to_displayname_map[occupant_node] = display_name;
     dumpSessions("");
 end);
 
@@ -60,18 +50,9 @@ module:hook('muc-occupant-left', function(event)
 
     local room_node, _, _ = jid_split(room.jid);
     local occupant_node, _, _ = jid_split(occupant.jid);
-    local user_info = username_to_displayname_map[occupant_node] or {};
-    log('info', "[%s(%s)] left [%s]", user_info.name or "unknown", occupant_node, room_node);
+    log('info', "[%s(%s)] left [%s]", username_to_displayname_map[occupant_node], occupant_node, room_node);
     username_to_displayname_map[occupant_node] = nil;
     dumpSessions(occupant_node);
-
-    -- Make HTTP request to notify left event
-    local url = "https://s1.idigest.app/meet/left?userId=" .. occupant_node;
-    http.request(url, {}, function(body, code, headers, status)
-        if code ~= 200 then
-            log('warn', 'Failed to notify left event for %s: code=%s, status=%s', occupant_node, code, status);
-        end
-    end);
 end);
 
 -- Hook into room creation to add this wrapper to every new room
@@ -118,27 +99,8 @@ function setupAffiliation(room, origin, stanza)
                 local body = json.decode(basexx.from_url64(bodyB64));
                 local jid = jid_bare(stanza.attr.from);
                 local occupant_node, _, _ = jid_split(jid);
-                
-                -- Initialize if not already present
-                if not username_to_displayname_map[occupant_node] then
-                    username_to_displayname_map[occupant_node] = {};
-                end
-                
-                -- Extract user info from JWT token
-                if body["context"] and body["context"]["user"] then
-                    username_to_displayname_map[occupant_node].email = body["context"]["user"]["email"];
-                    username_to_displayname_map[occupant_node].name = body["context"]["user"]["name"];
-                end
-                
-                -- Get IP from connection
-                if origin.conn then
-                    username_to_displayname_map[occupant_node].ip = origin.conn:ip();
-                end
-                
-                local user_info = username_to_displayname_map[occupant_node];
-                log('info', "%s(%s) Email: %s IP: %s: %s", user_info.name or "unknown", occupant_node, 
-                    user_info.email or "unknown", user_info.ip or "unknown", basexx.from_url64(bodyB64));
-                
+                log('info', "%s(%s): %s", username_to_displayname_map[occupant_node], occupant_node,
+                    basexx.from_url64(bodyB64));
                 -- If user is a moderator or an admin, set their affiliation to be an owner
                 if body["moderator"] == true or is_admin(jid) then
                     room:set_affiliation("token_plugin", jid, "owner");

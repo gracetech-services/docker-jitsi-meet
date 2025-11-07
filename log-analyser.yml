@@ -17,7 +17,7 @@ services:
 
   otel-collector:
     container_name: otel
-    image: otel/opentelemetry-collector-contrib:0.102.0
+    image: otel/opentelemetry-collector-contrib
     user: "0" # required for reading docker container logs
     volumes:
       - ./log-analyser/otel-collector-config.yaml:/etc/otelcol-contrib/config.yaml
@@ -26,7 +26,3 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       meet.jitsi:
-
-# Custom network so all services can communicate using a FQDN
-networks:
-  meet.jitsi:

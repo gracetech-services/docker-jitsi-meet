@@ -71,10 +71,6 @@ services:
             - NUM_LOUDEST
         networks:
             meet.jitsi:
-        logging:
-            driver: "json-file"
-            options:
-                labels: "service"
-# Custom network so all services can communicate using a FQDN
+
 networks:
     meet.jitsi:

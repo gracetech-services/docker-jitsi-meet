@@ -13,6 +13,6 @@ RUN apt-dpkg-wrap apt-get update && \
     apt-cleanup
 
 COPY rootfs/ /
-COPY local_build/* /usr/share/jicofo/
+COPY local_build/ /usr/share/jicofo/
 
 VOLUME /config

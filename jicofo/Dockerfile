@@ -11,8 +11,8 @@ LABEL org.opencontainers.image.documentation="https://jitsi.github.io/handbook/"
 RUN apt-dpkg-wrap apt-get update && \
     apt-dpkg-wrap apt-get install -y jicofo && \
     apt-cleanup
+
 COPY rootfs/ /
-COPY local_build/jicofo.jar /usr/share/jicofo
-COPY local_build/lib /usr/share/jicofo/lib
+COPY local_build/* /usr/share/jicofo/
 
 VOLUME /config

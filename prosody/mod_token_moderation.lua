@@ -16,21 +16,14 @@ local jid_split = require"util.jid".split;
 log('info', 'Loaded token moderation plugin');
 
 local username_to_displayname_map = {};
-local username_to_userId_map = {};
-
--- Helper function to safely get userId with fallback
-local function getUserIdOrNA(username)
-    return username_to_userId_map[username] or "N/A";
-end
-
 local function dumpSessions(hide_user_name)
     local index = 0;
     for _, session in pairs(prosody.full_sessions) do
         local username = session.username;
         if (username ~= 'focus' and username ~= 'jvb' and username ~= hide_user_name) then
             index = index + 1;
-            log('info', "#%d: [%s(%s)] userId#%s in room [%s]", index, username_to_displayname_map[username], username,
-                getUserIdOrNA(username), session.jitsi_web_query_room);
+            log('info', "#%d: [%s(%s)] in room [%s]", index, username_to_displayname_map[username], username,
+                session.jitsi_web_query_room);
         end
     end
     log('info', "Total online users: %d", index);
@@ -45,36 +38,8 @@ module:hook("muc-occupant-joined", function(event)
     local display_name = occupant:get_presence():get_child_text('nick', 'http://jabber.org/protocol/nick');
     local room_node, _, _ = jid_split(room.jid);
     local occupant_node, _, _ = jid_split(occupant.jid);
+    log('info', "[%s(%s)] joined [%s]", display_name, occupant_node, room_node);
     username_to_displayname_map[occupant_node] = display_name;
-
-    -- Extract userId from token and store in map
-    local origin = occupant._origin;
-    if origin and origin.auth_token then
-        local dotFirst = origin.auth_token:find("%.");
-        if dotFirst then
-            local dotSecond = origin.auth_token:sub(dotFirst + 1):find("%.");
-            if dotSecond then
-                local bodyB64 = origin.auth_token:sub(dotFirst + 1, dotFirst + dotSecond - 1);
-                local success, body = pcall(function()
-                    return json.decode(basexx.from_url64(bodyB64));
-                end);
-
-                if success and body and body.context and body.context.user and body.context.user.email then
-                    local email = body.context.user.email;
-                    -- Extract userId from email (matches any domain: userId@domain.extension)
-                    local userId = email:match("^([^@]+)@");
-                    if userId then
-                        username_to_userId_map[occupant_node] = userId;
-                    end
-                elseif not success then
-                    log('warn', "Failed to decode token for user [%s(%s)]", display_name, occupant_node);
-                end
-            end
-        end
-    end
-
-    log('info', "[%s(%s)] userId#%s joined [%s]", display_name, occupant_node, getUserIdOrNA(occupant_node), room_node);
-
     dumpSessions("");
 end);
 
@@ -88,7 +53,6 @@ module:hook('muc-occupant-left', function(event)
     local occupant_node, _, _ = jid_split(occupant.jid);
     log('info', "[%s(%s)] left [%s]", username_to_displayname_map[occupant_node], occupant_node, room_node);
     username_to_displayname_map[occupant_node] = nil;
-    username_to_userId_map[occupant_node] = nil;
     dumpSessions(occupant_node);
 end);
 

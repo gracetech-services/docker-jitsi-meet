@@ -3,7 +3,7 @@ JITSI_RELEASE ?= stable
 JITSI_BUILD ?= unstable
 JITSI_REPO ?= jitsi
 
-JITSI_SERVICES := base base-java web prosody jicofo jvb jigasi jibri
+JITSI_SERVICES := base base-java web prosody jicofo jvb # jigasi jibri
 
 BUILD_ARGS := \
 	--build-arg JITSI_REPO=$(JITSI_REPO) \
@@ -35,7 +35,6 @@ $(addprefix buildx_,$(JITSI_SERVICES)):
 build:
 	docker buildx build \
 		$(BUILD_ARGS) \
-		--load \
 		--progress plain \
 		--tag $(JITSI_REPO)/$(JITSI_SERVICE) \
 		$(JITSI_SERVICE)

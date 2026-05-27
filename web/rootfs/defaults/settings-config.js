@@ -400,6 +400,7 @@ config.deploymentInfo.envType = '{{ .Env.DEPLOYMENTINFO_ENVIRONMENT_TYPE }}';
 
 {{ if .Env.DEPLOYMENTINFO_REGION -}}
 config.deploymentInfo.region = '{{ .Env.DEPLOYMENTINFO_REGION }}';
+config.deploymentInfo.userRegion = '{{ .Env.DEPLOYMENTINFO_REGION }}';
 {{ end -}}
 
 // Deep Linking
@@ -623,6 +624,11 @@ config.whiteboard.collabServerBaseUrl = 'https://eght-excalidraw-backend-pilot.c
 config.whiteboard.collabServerBaseUrl = 'https://eght-excalidraw-backend.cloudflare.jitsi.net';
 {{ end -}}
 config.whiteboard.userLimit = 25;
+{{ end -}}
+
+
+{{ if .Env.CHANNEL_LAST_N -}}
+config.channelLastN = {{ .Env.CHANNEL_LAST_N }};
 {{ end -}}
 
 // Testing

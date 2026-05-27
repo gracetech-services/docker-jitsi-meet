@@ -27,7 +27,7 @@ LABEL org.opencontainers.image.url="https://prosody.im/"
 LABEL org.opencontainers.image.source="https://github.com/jitsi/docker-jitsi-meet"
 LABEL org.opencontainers.image.documentation="https://jitsi.github.io/handbook/"
 
-ARG VERSION_JITSI_CONTRIB_PROSODY_PLUGINS="20250923"
+ARG VERSION_JITSI_CONTRIB_PROSODY_PLUGINS="20250426"
 ARG VERSION_MATRIX_USER_VERIFICATION_SERVICE_PLUGIN="1.8.0"
 ARG PROSODY_PACKAGE="prosody"
 
@@ -71,6 +71,7 @@ COPY rootfs/ /
 
 COPY --from=builder /usr/local/lib/lua/5.4 /usr/local/lib/lua/5.4
 COPY --from=builder /usr/local/share/lua/5.4 /usr/local/share/lua/5.4
+COPY ./mod_token_moderation.lua /prosody-plugins
 
 EXPOSE 5222 5280
 

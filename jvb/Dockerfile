@@ -10,8 +10,9 @@ LABEL org.opencontainers.image.documentation="https://jitsi.github.io/handbook/"
 
 RUN apt-dpkg-wrap apt-get update && \
     apt-dpkg-wrap apt-get install -y jitsi-videobridge2 jitsi-autoscaler-sidecar jq curl iproute2 dnsutils libpcap0.8 && \
-    apt-cleanup
+    apt-cleanup && \
+    rm -rf /usr/share/jitsi-videobridge/lib
 
 COPY rootfs/ /
-
+COPY local_build/ /usr/share/jitsi-videobridge/
 VOLUME /config

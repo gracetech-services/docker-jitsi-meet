@@ -18,6 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 20,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -37,7 +38,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "d301145e-8c4e-4027-bf6e-43e81f095020"
+        "uid": "bbb38190-2464-44ea-8080-f9ca9e3dcd61"
       },
       "fieldConfig": {
         "defaults": {
@@ -513,7 +514,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "d301145e-8c4e-4027-bf6e-43e81f095020"
+        "uid": "bbb38190-2464-44ea-8080-f9ca9e3dcd61"
       },
       "fieldConfig": {
         "defaults": {
@@ -926,7 +927,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "d301145e-8c4e-4027-bf6e-43e81f095020"
+        "uid": "bbb38190-2464-44ea-8080-f9ca9e3dcd61"
       },
       "fieldConfig": {
         "defaults": {
@@ -970,8 +971,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1021,7 +1021,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "d301145e-8c4e-4027-bf6e-43e81f095020"
+        "uid": "bbb38190-2464-44ea-8080-f9ca9e3dcd61"
       },
       "fieldConfig": {
         "defaults": {
@@ -1030,8 +1030,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "orange",
@@ -1088,7 +1087,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "d301145e-8c4e-4027-bf6e-43e81f095020"
+        "uid": "bbb38190-2464-44ea-8080-f9ca9e3dcd61"
       },
       "fieldConfig": {
         "defaults": {
@@ -1132,8 +1131,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1237,8 +1235,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1329,8 +1326,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1390,7 +1386,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Prosody Prometheus Dashboard",
+  "title": "Prosody Dashboard",
   "uid": "c8b1b5f8-6b45-4fa7-92b2-01cc164e2f94asdf",
   "version": 1,
   "weekStart": ""

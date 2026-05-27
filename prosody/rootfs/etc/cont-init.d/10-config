@@ -9,6 +9,9 @@ fi
 
 PROSODY_CFG="/config/prosody.cfg.lua"
 
+mkdir -p /etc/prosody
+ln -sf "$PROSODY_CFG" /etc/prosody/prosody.cfg.lua
+
 if [[ ! -d /config/data ]]; then
     mkdir -pm 750 /config/data
 fi
